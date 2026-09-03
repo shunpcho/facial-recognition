@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "Facial recognition for images."
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "numpy>=2.2.0",
+    "opencv-contrib-python-headless>=4.10.0.84",
+    "torch>=2.14.0",
+]
 
 [dependency-groups]
 dev = [
@@ -44,7 +48,7 @@ exclude = [
 ]
 
 [tool.ruff.lint]
-preview = true
+preview = false
 select = ["ALL"]
 ignore = [
     "COM812",
