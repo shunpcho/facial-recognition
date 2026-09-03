@@ -9,10 +9,10 @@ from pathlib import Path
 from facial_recognition.opencv_backend import OpenCVSFaceBackend
 from facial_recognition.torch_training import (
     DEFAULT_IMAGE_SIZE,
-    TrainingConfig,
     prepare_face_training_samples,
     save_torch_checkpoint,
     train_face_embedding_model,
+    TrainingConfig,
 )
 
 

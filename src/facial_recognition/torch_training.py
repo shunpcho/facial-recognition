@@ -11,17 +11,19 @@ import cv2
 import numpy as np
 import numpy.typing as npt
 import torch
-import torch.nn.functional as functional
-from torch import Tensor, nn
+from torch import nn, Tensor
+from torch.nn import functional
 from torch.optim import AdamW
 from torch.utils.data import DataLoader, Dataset
 
-from facial_recognition.core import FaceDetection, ImageArray, RecognitionBackend, preprocess_image
+from facial_recognition.core import FaceDetection, ImageArray, preprocess_image, RecognitionBackend
 
 RGB_CHANNELS = 3
 DEFAULT_IMAGE_SIZE = (112, 112)
 MAX_UINT8_VALUE = 255.0
 SUPPORTED_IMAGE_SUFFIXES = (".jpg", ".jpeg", ".png", ".bmp", ".webp")
+MIN_TRAINING_CLASSES = 2
+IMAGE_SIZE_DIMENSIONS = 2
 
 
 def _select_largest_face(detections: Sequence[FaceDetection]) -> FaceDetection:
@@ -170,9 +172,7 @@ def _collect_identity_directories(dataset_dir: Path) -> list[Path]:
 
 def _collect_identity_image_paths(identity_dir: Path) -> list[Path]:
     image_paths = sorted(
-        path
-        for path in identity_dir.iterdir()
-        if path.is_file() and path.suffix.lower() in SUPPORTED_IMAGE_SUFFIXES
+        path for path in identity_dir.iterdir() if path.is_file() and path.suffix.lower() in SUPPORTED_IMAGE_SUFFIXES
     )
     if not image_paths:
         msg = f"No image files found under: {identity_dir}"
@@ -203,7 +203,7 @@ def prepare_face_training_samples(
                 )
             )
 
-    if len(class_names) < 2:
+    if len(class_names) < MIN_TRAINING_CLASSES:
         msg = "PyTorch training requires at least two identity directories."
         raise ValueError(msg)
 
@@ -219,7 +219,7 @@ def train_face_embedding_model(
     if not samples:
         msg = "Training samples must not be empty."
         raise ValueError(msg)
-    if num_classes < 2:
+    if num_classes < MIN_TRAINING_CLASSES:
         msg = "Training requires at least two classes."
         raise ValueError(msg)
 
@@ -309,7 +309,7 @@ def load_torch_checkpoint(
     )
     embedding_dim = int(checkpoint["embedding_dim"])
     image_size_values = cast("Sequence[int]", checkpoint["image_size"])
-    if len(image_size_values) != 2:
+    if len(image_size_values) != IMAGE_SIZE_DIMENSIONS:
         msg = "Checkpoint image_size must contain exactly two integers."
         raise ValueError(msg)
     model = FaceEmbeddingNet(embedding_dim=embedding_dim)

@@ -14,12 +14,12 @@ from facial_recognition.opencv_backend import OpenCVSFaceBackend
 from facial_recognition.torch_backend import TorchEmbeddingBackend
 from facial_recognition.torch_training import (
     FaceEmbeddingNet,
-    PreparedFaceSample,
-    TrainingConfig,
     load_torch_checkpoint,
     prepare_face_training_samples,
+    PreparedFaceSample,
     save_torch_checkpoint,
     train_face_embedding_model,
+    TrainingConfig,
 )
 
 __all__ = [

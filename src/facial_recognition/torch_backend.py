@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Self
 
@@ -20,6 +20,11 @@ class TorchEmbeddingBackend:
     alignment_backend: RecognitionBackend
     checkpoint_path: Path
     device: str = "cpu"
+    class_names: tuple[str, ...] = field(init=False)
+    image_size: tuple[int, int] = field(init=False)
+    threshold: float = field(init=False)
+    _embedder: torch.nn.Module = field(init=False, repr=False)
+    _torch_device: torch.device = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
         self._torch_device = torch.device(self.device)
