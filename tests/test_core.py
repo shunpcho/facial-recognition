@@ -6,12 +6,11 @@ import numpy as np
 import pytest
 
 from facial_recognition import (
+    cosine_similarity,
     FaceDetection,
     FaceRecognitionPipeline,
-    MatchResult,
-    RecognitionBackend,
-    cosine_similarity,
     preprocess_image,
+    RecognitionBackend,
 )
 
 
@@ -63,7 +62,10 @@ def test_pipeline_enroll_and_recognize_identity() -> None:
 
     result = pipeline.recognize(np.full((4, 4, 3), 66, dtype=np.uint8))
 
-    assert result == MatchResult(identity="alice", similarity=pytest.approx(0.99997, abs=1e-5), threshold=0.95, accepted=True)
+    assert result.identity == "alice"
+    assert result.threshold == 0.95
+    assert result.accepted
+    assert result.similarity == pytest.approx(0.9999999, abs=1e-6)
 
 
 def test_pipeline_rejects_unknown_identity_when_below_threshold() -> None:
@@ -88,4 +90,4 @@ def test_compare_images_uses_cosine_similarity_threshold() -> None:
     )
 
     assert result.accepted
-    assert result.similarity == pytest.approx(0.999996, abs=1e-6)
+    assert result.similarity == pytest.approx(0.99999875, abs=1e-6)

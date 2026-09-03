@@ -2,13 +2,13 @@
 
 from facial_recognition.core import (
     ComparisonResult,
+    cosine_similarity,
     FaceDetection,
     FaceGallery,
     FaceRecognitionPipeline,
     MatchResult,
-    RecognitionBackend,
-    cosine_similarity,
     preprocess_image,
+    RecognitionBackend,
 )
 from facial_recognition.opencv_backend import OpenCVSFaceBackend
 

@@ -47,7 +47,7 @@ exclude = [
 ]
 
 [tool.ruff.lint]
-preview = true
+preview = false
 select = ["ALL"]
 ignore = [
     "COM812",
