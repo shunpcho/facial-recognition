@@ -29,6 +29,10 @@ class RunPaths:
         """Atomically persist the fully resolved run configuration."""
         return _write_json(self.root / "config.json", config)
 
+    def write_artifact_json(self, name: str, payload: Mapping[str, str | int | float]) -> Path:
+        """Atomically persist one JSON artifact beneath this run."""
+        return _write_json(self.artifacts / name, payload)
+
 
 def _write_json(path: Path, payload: Mapping[str, str | int | float]) -> Path:
     """Write JSON atomically so interrupted processes never leave partial metadata."""
