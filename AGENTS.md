@@ -1,4 +1,4 @@
-# Agent Instructions (Copilot / AI assistants)
+# Agent Instructions (Copilot/AI assistants)
 
 ## Instructions
 
@@ -12,43 +12,29 @@
 
 ## Overview
 
-This is a template repository providing guidelines, best practices, and conventions for Python projects working with AI assistants. It defines agent instructions, coding standards, project structure, and dependency management practices.
+This document provides guidelines, best practices, and conventions for Python projects that use AI assistants. It defines agent instructions, coding standards, project structure, and dependency-management practices.
 
-## 0) Where to find coding rules
+## Documentation
 
-- Coding rules (style, typing, testing, tooling) are defined in:
-  - `.github/copilot-instructions.md`
-- Consult it before making stylistic decisions.
+- Follow `.github/copilot-instructions.md` for Python coding rules.
+- Consult the design documents and decisions in the `docs/` directory.
 
-## 1) Priority / scope
+## Repository structure
 
-- Follow this file first.
-- Then follow `.github/copilot-instructions.md`.
-- Then follow other repository docs (`README.md`, `CONTRIBUTING.md`, `docs/*`).
-- If instructions conflict, ask for clarification rather than guessing.
-
-## 2) Repository structure (must follow)
-
-Expected at project root:
+The project root must contain:
 
 - `pyproject.toml` (required; single source of truth)
-- `src/<package_name>/` (package code; keep `src/` layout consistent)
+- `src/<package_name>/` (package code; keep the `src/` layout consistent)
 - `tests/`
 - `docs/`
 
-## 3) Dependency management (uv required)
+## Dependency management
 
-- Dependency management MUST use **uv**.
-- Prefer `uv run ...` to execute tools in the managed environment.
+Dependency management must use **uv**. Prefer `uv run ...` when executing tools in the managed environment.
 
-## 4) What to include in proposals/patches
+## Key resources
 
-- Exact file paths to create/edit.
-- Final code (not only pseudocode).
-- Brief rationale.
-- How to run formatting/lint/type-check/tests (uv-based commands).
-
-## 5) Key resources
+Refer to the following resources for style, linting, type checking, and dependency management:
 
 - [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) - Referenced for style conventions
 - [Ruff](https://docs.astral.sh/ruff/) - Fast Python linter and formatter
