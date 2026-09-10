@@ -22,11 +22,11 @@ jobs:
           node-version: "22"
 
       - name: Run prettier
-        run: npx prettier@3.8.3 --check "**/*.md" --ignore-pattern ".venv/**"
+        run: npx prettier@3.8.3 --check "**/*.md" --ignore-path ".gitignore"
 
       - name: Run markdownlint
         uses: DavidAnson/markdownlint-cli2-action@v24
         with:
-          config: 'pyproject.toml'
-          configPointer: '/tool/markdownlint-cli2'
-          globs: '**/*.md'
+          config: "pyproject.toml"
+          configPointer: "/tool/markdownlint-cli2"
+          globs: "**/*.md"
