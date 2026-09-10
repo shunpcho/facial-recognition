@@ -109,3 +109,6 @@ reportUnnecessaryComparison = "warning"
 reportUnnecessaryTypeIgnoreComment = "warning"
 reportUnknownMemberType = false
 reportMissingTypeStubs = false
+
+[tool.markdownlint-cli2.config]
+line-length = false
