@@ -117,3 +117,4 @@ reportMissingTypeStubs = false
 
 [tool.markdownlint-cli2.config]
 line-length = false
+MD041 = false
