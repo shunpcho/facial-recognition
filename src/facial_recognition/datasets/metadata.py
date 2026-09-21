@@ -3,9 +3,8 @@
 import csv
 import logging
 from collections.abc import Iterable, Sequence
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Literal
+from typing import Literal, NamedTuple
 
 logger = logging.getLogger(__name__)
 
@@ -13,8 +12,7 @@ DatasetSplit = Literal["train", "val", "test"]
 _VALID_SPLITS = frozenset(("train", "val", "test"))
 
 
-@dataclass(frozen=True, slots=True)
-class FaceRecord:
+class FaceRecord(NamedTuple):
     """One valid face-image record from the metadata file."""
 
     image_path: Path
