@@ -184,14 +184,16 @@ mlflow.set_tracking_uri(cfg.mlflow_tracking_uri)
 mlflow.set_experiment(cfg.mlflow_experiment_name)
 
 with mlflow.start_run(run_name=cfg.mlflow_run_name or cfg.model):
-    mlflow.log_params({
-        "model": cfg.model,
-        "margin": cfg.margin,
-        "lr": cfg.lr,
-        "batch_size": cfg.batch_size,
-        "epochs": cfg.epochs,
-        "seed": cfg.seed,
-    })
+    mlflow.log_params(
+        {
+            "model": cfg.model,
+            "margin": cfg.margin,
+            "lr": cfg.lr,
+            "batch_size": cfg.batch_size,
+            "epochs": cfg.epochs,
+            "seed": cfg.seed,
+        }
+    )
 
     trainer = L.Trainer(...)
     trainer.fit(pl_model, loader)
