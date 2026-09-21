@@ -1,7 +1,6 @@
 """Pairwise verification metrics for normalized face embeddings."""
 
-from dataclasses import dataclass
-from typing import cast
+from typing import cast, NamedTuple
 
 import torch
 from torch.nn import functional
@@ -9,8 +8,7 @@ from torch.nn import functional
 _EMBEDDING_DIMENSIONS = 2
 
 
-@dataclass(frozen=True, slots=True)
-class VerificationMetrics:
+class VerificationMetrics(NamedTuple):
     """Summary statistics for a declared verification-pair protocol."""
 
     roc_auc: float

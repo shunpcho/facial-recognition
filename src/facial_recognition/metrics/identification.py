@@ -1,6 +1,6 @@
 """Gallery/probe identification metrics for normalized face embeddings."""
 
-from dataclasses import dataclass
+from typing import NamedTuple
 
 import torch
 from torch.nn import functional
@@ -8,8 +8,7 @@ from torch.nn import functional
 _EMBEDDING_DIMENSIONS = 2
 
 
-@dataclass(frozen=True, slots=True)
-class IdentificationMetrics:
+class IdentificationMetrics(NamedTuple):
     """Closed-set gallery/probe search metrics."""
 
     rank_1: float
